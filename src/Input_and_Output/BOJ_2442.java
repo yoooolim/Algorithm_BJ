@@ -5,20 +5,22 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class BOJ_2440 {
-    public static void main(String[] args) throws Exception{
+public class BOJ_2442 {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
-        if(n<1||n>100) System.exit(-1);
-        for(int i=n;i>=1;i--){
-            for(int j=0;j<i;j++) {
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n-i-1;j++){
+                bw.write(' ');
+            }
+            for(int j=0;j<2*i+1;j++){
                 bw.write('*');
             }
-            bw.write("\n"); // bw.newLine()보다 fast!
+            bw.newLine();
         }
         bw.flush();
-        bw.close();
     }
 }
