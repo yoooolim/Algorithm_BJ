@@ -9,8 +9,7 @@ public class BOJ_10992 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-//commit
-        //test
+
         int n = Integer.parseInt(br.readLine());
         for(int i=0;i<n-1;i++){
             for(int j=n-i-1;j>0;j--) bw.write(' ');
