@@ -15,7 +15,7 @@ public class BOJ_9465 {
                 String line = br.readLine();
                 String[] num = line.split(" ");
                 for(int k=1;k<n;k++) sticker[j][k]=Integer.parseInt(num[k]);
-
+                //for commit
             }
         }
     }
