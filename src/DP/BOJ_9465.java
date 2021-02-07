@@ -15,7 +15,6 @@ public class BOJ_9465 {
                 String line = br.readLine();
                 String[] num = line.split(" ");
                 for(int k=1;k<n;k++) sticker[j][k]=Integer.parseInt(num[k]);
-                //for
             }
         }
     }
@@ -24,7 +23,11 @@ public class BOJ_9465 {
         int sum=0;
         for(int i=0;i<4;i++){
             for(int j=0;j<sticker[0].length;j++){
-                //1번 경우, 2번 경우 모두 만족하는 function
+                if(i/2==0){
+                }
+                else{
+
+                }
             }
         }
         return max;
