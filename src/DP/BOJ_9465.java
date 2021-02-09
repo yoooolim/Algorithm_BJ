@@ -23,11 +23,8 @@ public class BOJ_9465 {
         int sum=0;
         for(int i=0;i<4;i++){
             for(int j=0;j<sticker[0].length;j++){
-                if(i/2==0){
-                }
-                else{
-
-                }
+                sum+=sticker[i/2][j];
+                if(max<sum) max=sum;
             }
         }
         return max;
