@@ -16,16 +16,28 @@ public class BOJ_9465 {
                 String[] num = line.split(" ");
                 for(int k=1;k<n;k++) sticker[j][k]=Integer.parseInt(num[k]);
             }
+            best[i]=bestChoice(sticker);
         }
+        for(int i=0;i<testnum;i++) System.out.println(best[i]);
     }
     public static int bestChoice(int[][] sticker){
         int max = 0;
         int sum=0;
-        for(int i=0;i<4;i++){
-            for(int j=0;j<sticker[0].length;j++){
-                sum+=sticker[i/2][j];
-                if(max<sum) max=sum;
-            }
+        for(int j=0;j<sticker[0].length;j++){
+            sum+=sticker[j%2][j];
+            if(max<sum) max=sum;
+        }
+        for(int j=0;j<sticker[0].length;j++){
+            sum+=sticker[(j+1)%2][j];
+            if(max<sum) max=sum;
+        }
+        for(int j=1;j<sticker[0].length;j++){
+            sum+=sticker[j%2][j];
+            if(max<sum) max=sum;
+        }
+        for(int j=1;j<sticker[0].length;j++){
+            sum+=sticker[(j+1)%2][j];
+            if(max<sum) max=sum;
         }
         return max;
     }
