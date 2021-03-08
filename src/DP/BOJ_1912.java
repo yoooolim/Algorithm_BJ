@@ -17,18 +17,12 @@ public class BOJ_1912 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int [] seq = new int[n];
         for(int i=0;i<n;i++) seq[i]=Integer.parseInt(st.nextToken(" "));
-        int[][] dp = new int[2][n];
-        int max = 0;
-        for(int i=0;i<n;i++){
-            if(seq[i]<=0) continue;
-            for(int j=0;j<n;j++) {
-                if(j==0) dp[i%2][j]=seq[i];
-                else{
-                    dp[i % 2][j] = dp[i%2][j-1]+seq[j];
-                }
-                max = Math.max(dp[i%2][j],max);
-            }
-
+        int[] dp = new int[n];
+        dp[0]=seq[0];
+        int max = dp[0];
+        for(int i=1;i<n;i++){
+            dp[i]=Math.max(dp[i-1]+seq[i],seq[i]);
+            max = Math.max(dp[i],max);
         }
         System.out.print(max);
         /*
