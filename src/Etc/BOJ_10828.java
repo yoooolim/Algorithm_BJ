@@ -7,6 +7,11 @@ import java.io.OutputStreamWriter;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+/*
+    명령어의 맨 앞 글자가 모두 다르다 라는 점에서
+    첫 글자만 따서 case문을 사용하면 더 빠르다!
+ */
+
 public class BOJ_10828 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +29,7 @@ public class BOJ_10828 {
                 }
                 bw.write(s.pop()+"\n");
             }
-            else if(cmd.equals("size")) bw.write(s.size());
+            else if(cmd.equals("size")) bw.write(s.size()+"\n");
             else if(cmd.equals("empty")) {
                 if(s.empty()==true) bw.write(1+"\n");
                 else bw.write(0+"\n");
