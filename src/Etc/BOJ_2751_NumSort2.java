@@ -11,7 +11,7 @@ import java.util.Collections;
     Buffered Writer 사용해야지 시간초과가 뜨지 않는다
 */
 
-public class BOJ_2751 {
+public class BOJ_2751_NumSort2 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
