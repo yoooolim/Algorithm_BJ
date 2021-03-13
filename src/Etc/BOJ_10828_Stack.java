@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
     첫 글자만 따서 case문을 사용하면 더 빠르다!
  */
 
-public class BOJ_10828 {
+public class BOJ_10828_Stack {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
