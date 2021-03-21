@@ -1,4 +1,4 @@
-package Programmers.Lv1;
+package Programmers.Kakao2021;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

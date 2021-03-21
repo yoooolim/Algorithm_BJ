@@ -1,4 +1,4 @@
-package Programmers.Lv2;
+/*package Programmers.Kakao2021;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,3 +16,4 @@ class Solution {
         return answer;
     }
 }
+*/
