@@ -13,3 +13,4 @@ public class BOJ_1206_DFSandBFS_2 {
         int s = Integer.parseInt(st.nextToken(" "));
     }
 }
+
