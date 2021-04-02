@@ -24,5 +24,6 @@ public class BOJ_11656_SuffixArray {
         bw.flush();
         br.close();
         bw.close();
+
     }
 }
