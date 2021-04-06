@@ -38,6 +38,7 @@ public class Keypad{
     public Integer getToNum(int origin, int togo){
         int result = 0;
         if(origin==0) origin=11;
+        if(togo==0) togo=11;
         while(origin!=togo){
             if((origin-1)/3<(togo-1)/3) origin+=3;
             else if((origin-1)/3>(togo-1)/3) origin-=3;
@@ -59,7 +60,7 @@ public class Keypad{
             keypad.setRight(num);
         }
         else if(menu==2){
-            if(leftORright=='l') changeValue(keypad,0,num,leftORright);
+            if(leftORright=='L') changeValue(keypad,0,num,leftORright);
             else changeValue(keypad,1,num,leftORright);
         }
         else System.exit(200);
@@ -68,8 +69,8 @@ public class Keypad{
 
 class Main {
     public static void main(String[] args){
-        int[] numbers = {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2};
-        String hand = "left";
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        String hand = "right";
         System.out.print(solution(numbers,hand,hand.toUpperCase().charAt(0)));
     }
 
@@ -77,6 +78,7 @@ class Main {
         String answer = "";
         Keypad keypad = new Keypad(10,12,answer);
         for(int i=0;i<numbers.length;i++){
+            if(numbers[i]==0) numbers[i]=11;
             if(numbers[i]%3==1) keypad.changeValue(keypad,0,numbers[i],leftORright);
             else if(numbers[i]%3==0) keypad.changeValue(keypad,1,numbers[i],leftORright);
             else{
