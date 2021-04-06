@@ -49,18 +49,18 @@ public class Keypad{
     }
 
 
-    public void changeValue(String answer, int menu,int num, int Left, int Right, char leftORright){
+    public void changeValue(Keypad keypad, int menu,int num, char leftORright){
         if(menu==0){
-            this.answer="L";
-            this.Left=num;
+            keypad.setAnswer(keypad.getAnswer()+"L");
+            keypad.setLeft(num);
         }
         else if(menu==1){
-            this.answer+="R";
-            this.Right=num;
+            keypad.setAnswer(keypad.getAnswer()+"R");
+            keypad.setRight(num);
         }
         else if(menu==2){
-            if(leftORright=='l') changeValue(answer,0,num,Left,Right,leftORright);
-            else changeValue(answer,1,num,Left,Right,leftORright);
+            if(leftORright=='l') changeValue(keypad,0,num,leftORright);
+            else changeValue(keypad,1,num,leftORright);
         }
         else System.exit(200);
     }
@@ -68,8 +68,8 @@ public class Keypad{
 
 class Main {
     public static void main(String[] args){
-        int[] numbers = {1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5};
-        String hand = "right";
+        int[] numbers = {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2};
+        String hand = "left";
         System.out.print(solution(numbers,hand,hand.toUpperCase().charAt(0)));
     }
 
@@ -77,17 +77,18 @@ class Main {
         String answer = "";
         Keypad keypad = new Keypad(10,12,answer);
         for(int i=0;i<numbers.length;i++){
-            if(numbers[i]%3==1) keypad.changeValue(answer,0,numbers[i],keypad.getLeft(),keypad.getRight(),leftORright);
-            else if(numbers[i]%3==0) keypad.changeValue(answer,1,numbers[i],keypad.getLeft(),keypad.getRight(),leftORright);
+            if(numbers[i]%3==1) keypad.changeValue(keypad,0,numbers[i],leftORright);
+            else if(numbers[i]%3==0) keypad.changeValue(keypad,1,numbers[i],leftORright);
             else{
                 int fromLeft =keypad.getToNum(keypad.getLeft(),numbers[i]);
                 int fromRight =keypad.getToNum(keypad.getRight(),numbers[i]);
 
-                if(fromLeft<fromRight) keypad.changeValue(answer,0,numbers[i],keypad.getLeft(),keypad.getRight(),leftORright);
-                else if(fromLeft>fromRight)keypad.changeValue(answer,1,numbers[i],keypad.getLeft(),keypad.getRight(),leftORright);
-                else keypad.changeValue(answer,2,numbers[i],keypad.getLeft(),keypad.getRight(),leftORright);
+                if(fromLeft<fromRight) keypad.changeValue(keypad,0,numbers[i],leftORright);
+                else if(fromLeft>fromRight)keypad.changeValue(keypad,1,numbers[i],leftORright);
+                else keypad.changeValue(keypad,2,numbers[i],leftORright);
             }
         }
+        answer=keypad.getAnswer();
         return answer;
     }
 }
