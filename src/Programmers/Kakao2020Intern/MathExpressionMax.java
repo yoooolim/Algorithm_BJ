@@ -2,35 +2,103 @@ package Programmers.Kakao2020Intern;
 
 import java.util.ArrayList;
 
+class Expression{
+    private ArrayList<Integer> operator;
+    private ArrayList<Integer> number;
+    private boolean plus;
+    private boolean minus;
+    private boolean mul;
+
+    public ArrayList<Integer> getOperator() {
+        return operator;
+    }
+
+    public ArrayList<Integer> getNumber() {
+        return number;
+    }
+
+    public void addOperator(int operator){
+        this.operator.add(operator);
+    }
+
+    public void addNumber(int num){
+        this.number.add(num);
+    }
+    public boolean isPlus() {
+        return plus;
+    }
+
+    public void setPlus(boolean plus) {
+        this.plus = plus;
+    }
+
+    public boolean isMinus() {
+        return minus;
+    }
+
+    public void setMinus(boolean minus) {
+        this.minus = minus;
+    }
+
+    public boolean isMul() {
+        return mul;
+    }
+
+    public void setMul(boolean mul) {
+        this.mul = mul;
+    }
+
+    public Expression(){
+        this.operator=new ArrayList<>();
+        this.number=new ArrayList<>();
+        this.plus = false;
+        this.minus = false;
+        this.mul = false;
+    }
+
+}
+
 public class MathExpressionMax {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args){
         String expression = "100-200*300-500+20";
         solution(expression);
     }
 
     public static long solution(String expression){
         long answer = 0;
-        ArrayList<Integer> operator = new ArrayList<>();
-        ArrayList<Integer> number = new ArrayList<>();
+        Expression ex = new Expression();
         // 숫자, operator 구분
-        seperate_oper_num(expression,operator,number);
-        
+        seperate_oper_num(expression,ex);
+        answer=calculateMax(ex);
         return answer;
     }
-    public static int seperate_oper_num(String expression,ArrayList<Integer> operator,
-                                         ArrayList<Integer> number){
+    public static long calculateMax(Expression ex){
+        int cal_num = 0;
+        long max = 0;
+        if(ex.isPlus()) cal_num++;
+        if(ex.isMinus()) cal_num++;
+        if(ex.isMul()) cal_num++;
+        cal_num=(int)(Math.pow(cal_num,2)*cal_num/2);
+        for(int i=0;i<cal_num;i++){
+            int cal = 0;
+            
+            max=Math.max(max,0);
+        }
+        return max;
+    }
+    public static int seperate_oper_num(String expression,Expression ex){
         int result = 0;
         String[] str = expression.split("[+*-]");
         int sum=0;
         for(int i=0;i<str.length-1;i++){
-            number.add(Integer.parseInt(str[i]));
-            sum+=Math.log10(number.get(i))+1;
-            operator.add(toOperator(expression.charAt(sum++)));
+            ex.addNumber(Integer.parseInt(str[i]));
+            sum+=Math.log10(ex.getNumber().get(i))+1;
+            ex.addOperator(toOperator(expression.charAt(sum++)));
         }
-        number.add(Integer.parseInt(str[str.length-1]));
-        if(operator.indexOf(0)!=-1) result+=100;
-        if(operator.indexOf(1)!=-1) result+=10;
-        if(operator.indexOf(2)!=-1) result+=1;
+        ex.addNumber(Integer.parseInt(str[str.length-1]));
+        if(ex.getOperator().indexOf(0)!=-1) ex.setPlus(true);
+        if(ex.getOperator().indexOf(1)!=-1) ex.setMinus(true);
+        if(ex.getOperator().indexOf(2)!=-1) ex.setMul(true);
         return result;
     }
     public static int toOperator(char c){
