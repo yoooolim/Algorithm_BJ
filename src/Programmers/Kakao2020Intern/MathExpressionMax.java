@@ -81,7 +81,6 @@ public class MathExpressionMax {
         cal_num=(int)(Math.pow(cal_num,2)*cal_num/2);
         for(int i=0;i<cal_num;i++){
             int cal = 0;
-            
             max=Math.max(max,0);
         }
         return max;
