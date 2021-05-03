@@ -13,7 +13,7 @@ public class NotCompletePerson {
         Arrays.sort(participant);
         Arrays.sort(completion);
         for(int i=0;i<completion.length;i++){
-            if(participant[i].equals(completion[i])) {
+            if(!participant[i].equals(completion[i])) {
                 answer = participant[i];
                 break;
             }
