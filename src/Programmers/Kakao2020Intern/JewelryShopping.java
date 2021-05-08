@@ -25,6 +25,7 @@ public class JewelryShopping {
                     dp[i].add(gems[j]);
                     if((max=Math.max(max,count[i]))==count[i]){
                         end[i]=j;
+
                     }
                 }
             }
