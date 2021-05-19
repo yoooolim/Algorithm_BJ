@@ -38,6 +38,7 @@ public class BOJ_11047_Coin0 {
             }
         }
         System.out.print(count);
+
     }
     static int approximate(int[] array, int wantToMake){
         int min = 0;
