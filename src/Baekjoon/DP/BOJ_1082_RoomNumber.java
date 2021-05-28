@@ -28,8 +28,9 @@ public class BOJ_1082_RoomNumber {
         Comparator<Product> comparator = new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                return o1.getPrice()-o2.getPrice();
+                return (o1.getPrice()!=o2.getPrice())? o1.getPrice()-o2.getPrice(): o1.getNumber()-o2.getNumber();
             }
+            //price 오름차순, 같다면 index로 오름차순
         };
         Arrays.sort(eachPrice,comparator);
 
@@ -43,40 +44,45 @@ public class BOJ_1082_RoomNumber {
     }
     public static int maxDigit(){
         int digit = 0;
+        //가장 싼 숫자가 0이 아닌 경우
         if(eachPrice[0].getNumber()!=0){
             int pay=0;
-            while((pay+=eachPrice[0].getPrice())<=money){
+            while((pay+=eachPrice[0].getPrice())<=money){ //해당 숫자로 다 채웠을 때 나오는 자리수가 최종 자릿수
                 digit++;
             }
         }
-        else{
-            int pay = eachPrice[0].getPrice();
+        else{// 가장 싼 숫자가 0인 경우
+            int pay = eachPrice[1].getPrice(); //두번째로 싼 숫자로 최대 자리수의 숫자를 채우고
             digit = 1;
-            while((pay+=eachPrice[1].getPrice())<=money){
+            while((pay+=eachPrice[0].getPrice())<=money){
                 digit++;
-            }
+            }//나머지는 다 가장 싼 숫자인 0으로 채웠을때 나오는 자리수가 최종 자리수
         }
         return digit;
     }
 
     public static String getMaxRoomNumber(int digit){
         StringBuilder max = new StringBuilder();
-        for(int i=0;i<digit;i++) max.append(numOfNumber-1);
-        int count = digit*eachPriceSortByIndex[numOfNumber-1].getPrice(); //가장 큰 수로만 이루어짐
-        int maxNumIndex = 0;
+        for(int i=0;i<digit;i++) max.append(numOfNumber-1); //index가 가장 큰 수로만 이루어진 수
+        int count = digit*eachPriceSortByIndex[numOfNumber-1].getPrice(); //가장 큰 수로만 이루어진 가격
+        int maxNumIndex = 0; //가격순 정렬에서 index가 최대인것 찾기 (가격을 낮추기 위해서)
         for(int i=0;i<numOfNumber;i++){
             if(numOfNumber-1==eachPrice[i].getNumber()) {
-                maxNumIndex=i;
+                maxNumIndex=i; //가격 순 정렬로 정렬했을 때, 숫자의 크기가 가장 큰 index를 받아오기
                 break;
             }
         }
 
-        for(int i=0;i<digit;i++){
+        //하나씩 비교하며 가격 낮추기
+        for(int i=0;i<digit;i++){ //모든 자리수를 돌며 진행
             for(int j=maxNumIndex;j>0;j--){
                 if(count<=money) return max.toString();
-                if(eachPrice[j].getPrice()==eachPrice[j-1].getPrice()) continue;
+                // 가격이 같다면, index순으로 오름차순 정렬 했기 때문에 바꾸지 않고 지나간다.
+                if(eachPrice[j].getPrice()==eachPrice[j-1].getPrice()||(i==digit-1&&eachPrice[j-1].getNumber()==0)) continue;
+                // max를 만드는 가격이 가지고 있는 돈보다 더 높다면, 수를 바꾸고
                 max.replace(digit-i-1,digit-i,Integer.toString(eachPrice[j-1].getNumber()));
                 count-=eachPrice[j].getPrice()-eachPrice[j-1].getPrice();
+                //바뀌기 전 숫자의 가격에서 바꾼 숫자의 가격의 차를 max를 만드는 가격에서 빼준다 -> 변경했으니까
             }
         }
         return max.toString();
