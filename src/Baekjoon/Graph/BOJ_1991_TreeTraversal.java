@@ -38,7 +38,6 @@ public class BOJ_1991_TreeTraversal {
             root = tree.get(i);
             break;
         }
-
         preorder(root);
         sb.append("\n");
         inorder(root);
