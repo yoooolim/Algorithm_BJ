@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
+/* ArrayList 보다는 HashSet이 시간적으로 빠르다! */
+
 public class BOJ_1764_Hearsay {
     static int hearSayNum;
     static int inputNum;
@@ -18,8 +20,7 @@ public class BOJ_1764_Hearsay {
         hearSayNum = Integer.parseInt(st.nextToken(" "));
         inputNum = Integer.parseInt(st.nextToken(" "));
 
-        ArrayList<String> hearSay = new ArrayList<>();
-        Collections.sort(hearSay);
+        HashSet<String> hearSay = new HashSet<>();
         PriorityQueue<String> answer = new PriorityQueue<>();
 
         for(int i=0;i<hearSayNum;i++){
