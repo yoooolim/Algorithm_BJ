@@ -1,4 +1,4 @@
-package Programmers.Heap;
+package Programmers.DataStructure;
 
 import java.io.IOException;
 import java.util.Comparator;
