@@ -11,6 +11,7 @@ public class P42839_PrimeNumberSearch {
     static int[] numbersArray;
     static HashSet<Integer> answerSet;
     static int answer;
+
     static int solution(String numbers) {
         answer = 0;
         visited = new boolean[numbers.length()];
