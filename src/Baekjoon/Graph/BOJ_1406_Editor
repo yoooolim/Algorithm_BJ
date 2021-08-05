@@ -1,0 +1,35 @@
+//에디터
+ import java.io.BufferedReader;
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+ import java.util.Stack;
+ public class BOJ_1406_Editor {
+     final static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     static Stack<Character> sL = new Stack<>();
+     static Stack<Character> sR = new Stack<>();
+     public static void main(String[] args) throws IOException {
+         String ori = br.readLine();
+         StringBuilder sb = new StringBuilder();
+         for(int i=0;i<ori.length();i++) sL.add(ori.charAt(i));
+         int cmdNum = Integer.parseInt(br.readLine());
+         for(int i=0;i<cmdNum;i++){ solution(br.readLine()); }
+         while(!sL.isEmpty()){sR.add(sL.pop());}
+         while(!sR.isEmpty()){sb.append(sR.pop());}
+         System.out.print(sb);
+     }
+     private static void solution(String cmdString){
+         char cmd = cmdString.charAt(0);
+         if(cmd=='L'){
+             if(sL.isEmpty()) return ;
+             sR.add(sL.pop());
+         } else if(cmd=='D'){
+             if(sR.isEmpty()) return ;
+             sL.add(sR.pop());
+         } else if(cmd=='B'){
+             if(sL.isEmpty()) return ;
+             sL.pop();
+         } else{
+             sL.add(cmdString.charAt(2));
+         }
+     }
+ }
