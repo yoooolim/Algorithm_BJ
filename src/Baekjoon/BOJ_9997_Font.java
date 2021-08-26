@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class BOJ_997_Font {
+public class BOJ_9997_Font {
     final static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     final static int allIn = (int)Math.pow(2,26)-1;
     static int testSentences = 0;
