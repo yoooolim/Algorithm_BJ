@@ -1,0 +1,42 @@
+class Solution {
+    public String solution(String m, String[] musicinfos) {
+        String answer = "";
+        int musicTotal = musicinfos.length;
+        int remTime = 0;
+        m = changeMelody(m);
+        for(int i=0;i<musicTotal;i++){
+            String[] musicInfo = musicinfos[i].split(",");
+            String[] startTime = musicInfo[0].split(":");
+            String[] endTime = musicInfo[1].split(":");
+            String musicNm = musicInfo[2];
+            String lyrics = musicInfo[3];
+            lyrics = changeMelody(lyrics);
+            int lyricsLen = lyrics.length();
+            int startH = Integer.parseInt(startTime[0]);
+            int startM = Integer.parseInt(startTime[1]);
+            int endH = Integer.parseInt(endTime[0]);
+            int endM = Integer.parseInt(endTime[1]);
+            int totalTime = (endH*60+endM)-(startH*60+startM);
+            String compareMusic = "";
+            for(int j=0;j<totalTime/lyricsLen;j++) compareMusic+=lyrics;
+            for(int j=0;j<totalTime%lyricsLen;j++) compareMusic+=lyrics.charAt(j);
+            
+            if(compareMusic.contains(m)){
+                if(remTime<totalTime){
+                    answer = musicNm;
+                    remTime = totalTime;
+                }
+            }
+        }
+        if(answer.equals("")) answer+="(None)";
+        return answer;
+    }
+    private static String changeMelody(String ori){
+        ori=ori.replace("A#","H");
+        ori=ori.replace("C#","I");
+        ori=ori.replace("D#","J");
+        ori=ori.replace("F#","K");
+        ori=ori.replace("G#","L");
+        return ori;
+    }
+}
