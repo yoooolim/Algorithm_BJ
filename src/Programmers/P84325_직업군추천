@@ -1,0 +1,46 @@
+    public String solution(String[] table, String[] languages, int[] preference) {
+
+        String answer = "";
+
+        int max = 0;
+
+        int langLen = languages.length;
+
+        for(int i=0;i<5;i++){
+
+            int sum = 0;
+
+            String[] section = table[i].split(" ");
+
+            for(int j=1;j<6;j++){
+
+                String tableLan = section[j];
+
+                for(int k=0;k<langLen;k++){
+
+                    if(tableLan.equals(languages[k])){
+
+                        sum+=((6-j)*preference[k]);
+
+                    }
+
+                }
+
+                if(max<sum||(max==sum&&answer.compareTo(section[0])>0)){
+
+                    answer = section[0];
+
+                    max = sum;
+
+                } 
+
+            }
+
+        }
+
+        return answer;
+
+    }
+
+}
+

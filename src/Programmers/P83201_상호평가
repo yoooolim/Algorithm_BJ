@@ -1,0 +1,33 @@
+class Solution {
+    public String solution(int[][] scores) {
+        String answer = "";
+        int N = scores.length;
+        for(int i=0;i<N;i++){
+            int sum=0;
+            int min = 101;
+            int max = 0;
+            int minNum = 0;
+            int maxNum = 0;
+            for(int j=0;j<N;j++){
+                int temp = scores[j][i];
+                sum+=temp;
+                if(temp==max) maxNum++;
+                else if(temp==min) minNum++;
+                else if(temp>max){ max = temp; maxNum=1; }
+                else if(temp<min){ min = temp; minNum=1; }
+            }
+            int self = scores[i][i];
+            if((self==max&&maxNum==1)||(self==min&&minNum==1)) answer+=getAvg(sum-self,N-1);
+            else answer+=getAvg(sum,N);
+        }
+        return answer;
+    }
+    private static char getAvg(int sum, int students){
+        double avg = sum/students;
+        if(avg>=90) return 'A';
+        if(avg>=80) return 'B';
+        if(avg>=70) return 'C';
+        if(avg>=50) return 'D';
+        return 'F';
+    }
+}
