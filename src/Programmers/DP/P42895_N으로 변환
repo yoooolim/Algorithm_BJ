@@ -1,0 +1,36 @@
+import java.util.*;
+class Solution {
+    public int solution(int N, int number) {
+        int answer = -1;
+        Set<Integer>[] set = new Set[9]; //1~8개까지 사용 가능
+        //사칙 연산 없이 N을 이어 붙여서 만들 수 있는 숫자를 일단 넣어
+        int temp = 0;
+        for(int i=1;i<9;i++){
+            set[i] = new HashSet<>();
+            set[i].add((temp = temp*10 + N));
+        }
+        //총 i개의 N을 이용해 만들 수 있는 수를 다 저장
+        for(int i=1;i<9;i++){
+            for(int j=1;j<i;j++){
+                for(Integer i1 : set[j]){
+                    for(Integer i2 : set[i-j]){
+                        set[i].add(i1+i2);
+                        set[i].add(i2+i1);
+                        set[i].add(i1-i2);
+                        set[i].add(i2-i1);
+                        set[i].add(i1*i2);
+                        set[i].add(i2*i1);
+                        if(i1!=0) set[i].add(i2/i1);
+                        if(i2!=0) set[i].add(i1/i2);
+                    }
+                }
+            }
+        }
+        for(int i=1;i<9;i++){
+            if(set[i].contains(number)) {
+                answer = i; break;
+            }
+        }
+        return answer;
+    }
+}
