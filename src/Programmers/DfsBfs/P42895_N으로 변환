@@ -1,0 +1,26 @@
+class Solution {
+    static int calCnt = Integer.MAX_VALUE;
+    static int from, to;
+    public int solution(int N, int number) {
+        from = N;
+        to = number;
+        makeNum(0,0);
+        return (calCnt==Integer.MAX_VALUE)? -1 : calCnt;
+    }
+    private static void makeNum(int now, int cnt){
+        if(cnt>8) { //8의 연산을 넘었으므로 -1 출력
+            calCnt = -1; return;
+        }
+        if(now==to) { //계산을 통해서 만들어 냈으면
+            calCnt = Math.min(cnt, calCnt); return;
+        }
+        int calNum = from;
+        for(int i=1;i<=8-cnt;i++){ //계산 횟수가 8을 넘으면 안돼
+            makeNum(now+calNum,cnt+i);
+            makeNum(now-calNum,cnt+i);
+            makeNum(now/calNum,cnt+i);
+            makeNum(now*calNum,cnt+i);
+            calNum = calNum*10+from;
+        }
+    }
+}
