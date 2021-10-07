@@ -1,0 +1,52 @@
+import java.util.*;
+class Solution {
+    public int solution(int n, int[][] wires) {
+        int answer = Integer.MAX_VALUE;
+        Node[] nodes = new Node[n+1];
+        //initial process
+        for(int i=1;i<=n;i++){
+            nodes[i] = new Node(i,new ArrayList<>());
+        }
+        for(int i=0;i<wires.length;i++){
+            int a = wires[i][0];
+            int b = wires[i][1];
+            nodes[a].adj.add(nodes[b]);
+            nodes[b].adj.add(nodes[a]);
+        }
+        //하나씩 자르면서 최소를 구해라
+        for(int i=0;i<wires.length;i++){
+            int cutWireA = wires[i][0];
+            int cutWireB = wires[i][1];
+            nodes[cutWireA].adj.remove(nodes[cutWireB]);
+            nodes[cutWireB].adj.remove(nodes[cutWireA]);
+            boolean[] visited = new boolean[n+1];
+            int diff=0;
+            for(int j=1;j<=n;j++){
+                if(visited[j]) continue;
+                int cnt = 0;
+                Queue<Node> q = new LinkedList<>();
+                q.offer(nodes[j]);
+                visited[j] = true;
+                while(!q.isEmpty()){
+                    Node now = q.poll();
+                    cnt++;
+                    for(Node item : now.adj){
+                        if(visited[item.idx]) continue;
+                        q.offer(item); visited[item.idx]=true;
+                    }
+                }
+                if(diff==0) diff=cnt;
+                else diff-=cnt;
+            }
+            if(diff<0) diff=-diff;
+            answer = Math.min(diff, answer);
+            nodes[cutWireA].adj.add(nodes[cutWireB]);
+            nodes[cutWireB].adj.add(nodes[cutWireA]);
+        }
+        return answer;
+    }
+    private static class Node{
+        int idx; List<Node> adj;
+        Node(int idx, List<Node> adj){ this.idx = idx; this.adj = adj; }
+    }
+}
