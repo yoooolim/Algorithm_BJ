@@ -1,0 +1,35 @@
+class Solution {
+    static int max = 0, kC;
+    static int[][] dungeonsC;
+    static boolean[] visited;
+    public int solution(int k, int[][] dungeons) {
+        dungeonsC = dungeons;
+        kC = k;
+        visited = new boolean[dungeons.length];
+        setSeq(0,dungeons.length,new int[dungeons.length]);
+        return max;
+    }
+    private static void setSeq(int depth, int length, int[] seq){
+        if(length==depth){
+            calCanGo(seq);
+            return;
+        }
+        for(int i=0;i<length;i++){
+            if(visited[i]) continue;
+            seq[depth]=i;
+            visited[i] = true;
+            setSeq(depth+1, length, seq);
+            visited[i] = false;
+        }
+    }
+    private static void calCanGo(int[] seq){
+        int copyK = kC;
+        int cnt = 0;
+        for(int i=0;i<seq.length;i++){
+            if(copyK<dungeonsC[seq[i]][0]) break;
+            copyK-=dungeonsC[seq[i]][1];
+            cnt++;
+        }
+        max = Math.max(cnt,max);
+    }
+}
