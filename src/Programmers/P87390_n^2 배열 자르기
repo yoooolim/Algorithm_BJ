@@ -1,0 +1,37 @@
+class Solution {
+    public int[] solution(int n, long left, long right) {
+        int leftR = (int)(left/(long)n);
+        int leftC = (int)(left%(long)n);
+        int rightR = (int)(right/(long)n);
+        int rightC = (int)(right%(long)n);
+        int[] answer = new int[(int)(right-left)+1];
+        int ansIdx = 0;
+        for(int i=leftR;i<=rightR;i++){
+            if(leftR==rightR){ //시작 row와 끝 row가 같은 경우
+                //그 줄의 행을 다 찾기
+                int[] temp = new int[n];
+                int tempIdx = 0;
+                for(int j=0;j<i+1;j++) temp[tempIdx++] = i+1;
+                for(int j=i+2;j<=n;j++) temp[tempIdx++] = j;
+                //범위에 맞는 행만 가져오기
+                for(int j=leftC;j<=rightC;j++) answer[ansIdx++]=temp[j];
+            } else if(i==leftR){ //시작 row일 경우
+                for(int j=leftC;j<i+1;j++) answer[ansIdx++] = i+1;
+                for(int j=i+2;j<=n;j++) {
+                    if(j<=leftC) continue;
+                    answer[ansIdx++] = j;
+                }
+            } else if(i==rightR){ //끝 row일 경우
+                for(int j=0;j<i+1;j++) {
+                    if(j>rightC) break;
+                    answer[ansIdx++] = i+1;
+                }
+                for(int j=i+1;j<=rightC;j++) answer[ansIdx++] = j+1;
+            } else {// 시작 row와 끝 row의 사이일 경우 (answer는 모든 행을 포함한다)
+                for(int j=0;j<i+1;j++) answer[ansIdx++] = i+1;
+                for(int j=i+2;j<=n;j++) answer[ansIdx++] = j;
+            }
+        }
+        return answer;
+    }
+}
